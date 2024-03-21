@@ -5,7 +5,7 @@ import { useUnit } from 'effector-react';
 import { $storeData, fetchDataWithStatus, resetStore } from './store';
 
 const App: FC = () => {
-  const { loading, data: effectorData } = useUnit($storeData) 
+  const { loading, error, data: effectorData } = useUnit($storeData) 
   const [toggle, setToggle] = useState(false)
   
 
@@ -29,6 +29,9 @@ const App: FC = () => {
         Показать данные с бекенда:
         <input type="checkbox" checked={toggle} onChange={handleToggle} /> 
       </label>
+      {error && (
+        <label>Ошибка, данные с бека не получены</label>
+      )}
       <DataTable data={effectorData} loading={loading} className='AppTable' />
     </div>
   )
